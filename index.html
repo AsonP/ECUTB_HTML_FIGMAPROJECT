@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Silicon — Manage All Your Money in One App</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="dark-theme.css">
+</head>
+<body data-theme="light">
+
+<!-- ============ NAVBAR ============ -->
+<header class="navbar">
+  <div class="container navbar__inner">
+    <a href="#" class="navbar__logo">
+      <img src="images/logo.svg" alt="Silicon logo" class="navbar__logo-img navbar__logo-img--light">
+      <img src="images/logo-dark.svg" alt="Silicon logo" class="navbar__logo-img navbar__logo-img--dark">
+    </a>
+
+    <nav class="navbar__right" id="navbarMenu">
+      <div class="theme-switch">
+        <span class="theme-switch__label">Dark Mode</span>
+        <button
+          type="button"
+          class="theme-switch__toggle"
+          id="themeToggle"
+          aria-pressed="false"
+          aria-label="Växla mellan ljust och mörkt läge"
+        ></button>
+      </div>
+      <a href="#" class="btn btn--primary btn--sm">
+        <img src="images/icon-user.svg" alt="" class="icon-18">
+        <span class="btn__label">Sign in / up</span>
+      </a>
+    </nav>
+
+    <button
+      type="button"
+      class="nav-toggle-btn"
+      id="navToggleBtn"
+      aria-expanded="false"
+      aria-controls="navbarMenu"
+      aria-label="Öppna meny"
+    >
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ============ HEADER (Figma: "Hero") ============ -->
+<section class="header">
+  <div class="container header__inner">
+    <div class="header__content">
+      <div class="header__text">
+        <h1>Manage All Your Money in One App</h1>
+        <p class="body-l">We offer you a new generation of the mobile banking.<br>Save, spend &amp; manage money in your pocket.</p>
+      </div>
+      <div class="market-btns">
+        <a href="#" class="market-btn">
+          <img src="images/app-store.svg" alt="Download on the App Store" style="height:22px" class="market-btn__img">
+        </a>
+        <a href="#" class="market-btn">
+          <img src="images/google-play.svg" alt="Get it on Google Play" style="height:22px" class="market-btn__img">
+        </a>
+      </div>
+    </div>
+    <div class="header__image">
+      <img src="images/phone-back.png" alt="Skärmavbild: budgetöversikt i appen" class="header__phone header__phone--back">
+      <img src="images/phone-front.png" alt="Skärmavbild: korthantering och transaktioner i appen" class="header__phone header__phone--front">
+    </div>
+  </div>
+</section>
+
+<!-- ============ LOGOS ============ -->
+<section class="logos">
+  <div class="container logos__grid">
+    <div class="logo-card">
+      <img src="images/logo-partner-1.svg" alt="Partner logo" class="logo-card__img logo-card__img--light">
+      <img src="images/logo-partner-1-dark.svg" alt="Partner logo" class="logo-card__img logo-card__img--dark">
+    </div>
+    <div class="logo-card">
+      <img src="images/logo-partner-2.svg" alt="Partner logo" class="logo-card__img logo-card__img--light">
+      <img src="images/logo-partner-2-dark.svg" alt="Partner logo" class="logo-card__img logo-card__img--dark">
+    </div>
+    <div class="logo-card">
+      <img src="images/logo-partner-3.svg" alt="Partner logo" class="logo-card__img logo-card__img--light">
+      <img src="images/logo-partner-3-dark.svg" alt="Partner logo" class="logo-card__img logo-card__img--dark">
+    </div>
+    <div class="logo-card">
+      <img src="images/logo-partner-4.svg" alt="Partner logo" class="logo-card__img logo-card__img--light">
+      <img src="images/logo-partner-4-dark.svg" alt="Partner logo" class="logo-card__img logo-card__img--dark">
+    </div>
+    <div class="logo-card">
+      <img src="images/logo-partner-5.svg" alt="Partner logo" class="logo-card__img logo-card__img--light">
+      <img src="images/logo-partner-5-dark.svg" alt="Partner logo" class="logo-card__img logo-card__img--dark">
+    </div>
+    <div class="logo-card logo-card--shadow">
+      <img src="images/logo-partner-6.svg" alt="Partner logo" class="logo-card__img logo-card__img--light">
+      <img src="images/logo-partner-6-dark.svg" alt="Partner logo" class="logo-card__img logo-card__img--dark">
+    </div>
+  </div>
+</section>
+
+<!-- ============ FEATURES (Figma: ikonrutnät + telefon) ============ -->
+<section class="features">
+  <div class="container features__inner">
+    <div class="features__image">
+      <img src="images/app-features-phone.png" alt="App feature screenshot">
+    </div>
+    <div class="features__content">
+      <h2>App Features</h2>
+      <p class="body-l muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin volutpat mollis egestas. Nam luctus facilisis ultrices. Pellentesque volutpat ligula est. Mattis fermentum, at nec lacus.</p>
+      <div class="feature-grid">
+        <div class="feature-item">
+          <div class="feature-icon"><img src="images/icon-credit-card.svg" alt=""></div>
+          <h3>Easy Payments</h3>
+          <p class="body-m muted">Id mollis consectetur congue egestas egestas suspendisse blandit justo.</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon"><img src="images/icon-wallet.svg" alt=""></div>
+          <h3>Regular Cashback</h3>
+          <p class="body-m muted">Sit facilisis dolor arcu, fermentum vestibulum arcu elementum imperdiet eleifend.</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon"><img src="images/icon-bars-graphic.svg" alt=""></div>
+          <h3>Cost Statistics</h3>
+          <p class="body-m muted">Mattis urna ultricies non amet, purus in auctor non. Odio vulputate ac nibh.</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon"><img src="images/icon-shield.svg" alt=""></div>
+          <h3>Data Security</h3>
+          <p class="body-m muted">Augue pulvinar justo, fermentum fames aliquam accumsan vestibulum non.</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon"><img src="images/icon-communication.svg" alt=""></div>
+          <h3>Support 24/7</h3>
+          <p class="body-m muted">A elementum, imperdiet enim, pretium etiam facilisi in aenean quam mauris.</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon"><img src="images/icon-happy.svg" alt=""></div>
+          <h3>Top Standards</h3>
+          <p class="body-m muted">Faucibus cursus maecenas lorem cursus nibh. Sociis sit risus id. Sit facilisis dolor arcu.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDER SECTION (Figma: "How Does It Work") ============ -->
+<section class="slider-section">
+  <div class="container">
+    <h2 class="center">How Does It Work?</h2>
+    <div class="carousel">
+      <img src="images/carousel-phone-1.png" alt="Skärmavbild: kontolista i appen" class="carousel__phone carousel__phone--side">
+      <img src="images/carousel-phone-2.png" alt="Skärmavbild: senaste transaktioner i appen" class="carousel__phone carousel__phone--main">
+      <img src="images/carousel-phone-3.png" alt="Skärmavbild: utgiftsöversikt i appen" class="carousel__phone carousel__phone--side">
+    </div>
+    <div class="slider-section__caption">
+      <h3>Latest transaction history</h3>
+      <p class="body-m muted">Enim, et amet praesent pharetra. Mi non ante hendrerit amet sed. Arcu sociis tristique quisque hac in consectetur condimentum.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ APP FEATURES — Section A ============ -->
+<section class="app-features app-features--reverse">
+  <div class="container app-features__inner">
+    <div class="app-features__content">
+      <h2>Make your money transfer simple and clear</h2>
+      <ul class="check-list">
+        <li><img src="images/icon-check-circle.svg" alt=""> Banking transactions are free for you</li>
+        <li><img src="images/icon-check-circle.svg" alt=""> No monthly cash commission</li>
+        <li><img src="images/icon-check-circle.svg" alt=""> Manage payments and transactions online</li>
+      </ul>
+      <a href="#" class="btn btn--primary">
+        Learn more
+        <img src="images/icon-arrow-right.svg" alt="" class="icon-20">
+      </a>
+    </div>
+    <div class="app-features__image">
+      <img src="images/money-transfer.png" alt="Transfer illustration">
+    </div>
+  </div>
+</section>
+
+<!-- ============ APP FEATURES — Section B ============ -->
+<section class="app-features">
+  <div class="container app-features__inner">
+    <div class="app-features__image">
+      <img src="images/visa-payment.png" alt="Payments illustration">
+    </div>
+    <div class="app-features__content">
+      <h2>Receive payment from international bank details</h2>
+      <div class="feature-grid feature-grid--2col">
+        <div class="feature-item">
+          <div class="feature-icon"><img src="images/icon-credit-card.svg" alt=""></div>
+          <p class="body-m muted">Manage your payments online. Mollis congue egestas egestas fermentum fames.</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon"><img src="images/icon-wallet.svg" alt=""></div>
+          <p class="body-m muted">A elementur and imperdiet enim, pretium etiam facilisi aenean quam mauris.</p>
+        </div>
+      </div>
+      <a href="#" class="btn btn--primary">
+        Learn more
+        <img src="images/icon-arrow-right.svg" alt="" class="icon-20">
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIALS SECTION ============ -->
+<section class="testimonials-section">
+  <div class="container testimonials-section__inner">
+    <div class="testimonials-section__side">
+      <h2>Clients are Loving Our App</h2>
+    </div>
+    <div class="testimonial-grid">
+      <div class="testimonial-card">
+        <div class="testimonial-card__quote">
+          <img src="images/icon-quote.svg" alt="">
+        </div>
+        <div class="stars">★★★★☆</div>
+        <p class="body-l muted">Sit pretium aliquam tempor, orci dolor sed maecenas rutrum sagittis. Laoreet posuere rhoncus, egestas lacus, egestas justo aliquam vel. Nisi vitae lectus hac hendrerit. Montes justo turpis sit amet.</p>
+        <div class="testimonial-card__author">
+          <img src="images/avatar-fannie.png" alt="Fannie Summers">
+          <div>
+            <strong>Fannie Summers</strong>
+            <span>Designer</span>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-card__quote">
+          <img src="images/icon-quote.svg" alt="">
+        </div>
+        <div class="stars">★★★★★</div>
+        <p class="body-l muted">Nunc senectus leo vel venenatis accumsan vestibulum sollicitudin amet porttitor. Nisl bibendum nulla tincidunt eu enim ornare dictumst sit amet. Dictum pretium dolor tincidunt egestas eget nunc.</p>
+        <div class="testimonial-card__author">
+          <img src="images/avatar-albert.png" alt="Albert Flores">
+          <div>
+            <strong>Albert Flores</strong>
+            <span>Developer</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="faq">
+  <div class="container faq__inner">
+    <div class="faq__side">
+      <h2>Any questions?<br>Check out the FAQs</h2>
+      <p class="body-l muted">Still have unanswered questions and need to get in touch?</p>
+      <div class="faq__contact-boxes">
+        <div class="contact-box">
+          <div class="feature-icon feature-icon--sm"><img src="images/icon-faq-contact.svg" alt=""></div>
+          <p class="body-m muted">Still have questions?</p>
+          <a href="#" class="link link--brand">Contact us
+            <img src="images/icon-arrow-success.svg" alt="" class="icon-20">
+          </a>
+        </div>
+        <div class="contact-box">
+          <div class="feature-icon feature-icon--sm"><img src="images/icon-faq-call.svg" alt=""></div>
+          <p class="body-m muted">Don't like phone calls?</p>
+          <a href="#" class="link link--success">Contact us
+            <img src="images/icon-arrow-brand.svg" alt="" class="icon-20">
+          </a>
+        </div>
+      </div>
+      <!-- Ersätter de två kontaktrutorna på tablet/mobil, som i Figma-filen -->
+      <a href="#" class="btn btn--primary faq__mobile-contact">Contact us now</a>
+    </div>
+    <div class="accordion">
+      <details class="accordion__item">
+        <summary>Is any of my personal information stored in the App?
+          <img src="images/icon-chevron.svg" alt="" class="chevron"></summary>
+        <p class="body-m muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin volutpat mollis egestas. Nam luctus facilisis ultrices. Pellentesque volutpat ligula est. Mattis fermentum, at nec lacus. Sed euismod, nisl eget tincidunt lobortis.</p>
+      </details>
+      <details class="accordion__item">
+        <summary>What formats can I download my transaction history in?
+          <img src="images/icon-chevron.svg" alt="" class="chevron"></summary>
+        <p class="body-m muted">Sit pretium aliquam tempor, orci dolor sed maecenas rutrum sagittis. Laoreet posuere rhoncus, egestas lacus, egestas justo aliquam vel. Nisi vitae lectus hac hendrerit. Montes justo turpis sit amet.</p>
+      </details>
+      <details class="accordion__item" open>
+        <summary>Can I schedule future transfers?
+          <img src="images/icon-chevron.svg" alt="" class="chevron"></summary>
+        <p class="body-m muted">Nunc duis id aenean gravida tincidunt eu, tempor ullamcorper. Viverra aliquam arcu, viverra et, cursus. Aliquet pretium cursus adipiscing gravida et consequat lobortis arcu velit. Nibh pharetra fermentum duis accumsan lectus non. Massa cursus molestie lorem scelerisque pellentesque. Nisi, enim, arcu purus gravida adipiscing euismod montes, duis egestas. Vehicula eu etiam quam tristique tincidunt suspendisse ut consequat.</p>
+      </details>
+      <details class="accordion__item">
+        <summary>When can I use Banking App services?
+          <img src="images/icon-chevron.svg" alt="" class="chevron"></summary>
+        <p class="body-m muted">Mattis urna ultricies non amet, purus in auctor non. Odio vulputate ac nibh. Augue pulvinar justo, fermentum fames aliquam accumsan vestibulum non. Sed euismod, nisl eget tincidunt lobortis.</p>
+      </details>
+      <details class="accordion__item">
+        <summary>Can I create my own password that is easy for me to remember?
+          <img src="images/icon-chevron.svg" alt="" class="chevron"></summary>
+        <p class="body-m muted">A elementum, imperdiet enim, pretium etiam facilisi in aenean quam mauris. Faucibus cursus maecenas lorem cursus nibh. Sociis sit risus id. Sit facilisis dolor arcu.</p>
+      </details>
+      <details class="accordion__item">
+        <summary>What happens if I forget or lose my password?
+          <img src="images/icon-chevron.svg" alt="" class="chevron"></summary>
+        <p class="body-m muted">Id mollis consectetur congue egestas egestas suspendisse blandit justo. Regular cashback sit facilisis dolor arcu, fermentum vestibulum arcu elementum imperdiet eleifend.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SUBSCRIBE ============ -->
+<section class="subscribe">
+  <div class="container">
+    <div class="subscribe-card">
+      <img src="images/icon-notification.svg" alt="" class="subscribe-card__icon">
+      <h3>Subscribe to our newsletter to stay informed about latest updates</h3>
+      <form class="subscribe-card__form" onsubmit="return false;">
+        <div class="subscribe-card__input">
+          <img src="images/icon-envelope.svg" alt="">
+          <input type="email" placeholder="Your Email" required>
+        </div>
+        <button type="submit" class="btn btn--primary">Subscribe</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="container">
+    <p class="body-s muted center">© 2025 Silicon. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="hamburger.js"></script>
+<script src="toggle.js"></script>
+</body>
+</html>

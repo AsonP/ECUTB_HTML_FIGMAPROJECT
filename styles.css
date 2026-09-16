@@ -1,0 +1,764 @@
+/* ===== Design tokens (hämtade från Figma-filen) ===== */
+:root {
+  /* Färger */
+  --gray-100: #F3F6FF;
+  --gray-300: #E2E5F1;
+  --gray-400: #D4D7E5;
+  --gray-500: #B4B7C9;
+  --gray-600: #9397AD;
+  --gray-700: #565973;
+  --gray-800: #33354D;
+  --gray-900: #0B0F19;
+  --white: #FFFFFF;
+  --brand-primary: #6366F1;
+  --brand-soft: rgba(99, 102, 241, 0.08);
+  --success: #22C55E;
+  --warning: #FFBA08;
+  --error: #EF4444;
+
+  /* Typografi */
+  --font: 'Manrope', system-ui, sans-serif;
+
+  /* Skuggor */
+  --shadow-s: 0px 2px 6.4px -1px rgba(19,16,34,0.03), 0px 4.4px 12px -1px rgba(19,16,34,0.06);
+  --shadow-m: 0px 4px 9px -1px rgba(19,16,34,0.03), 0px 4.4px 20px -1px rgba(19,16,34,0.05);
+  --shadow-brand: 0px 8px 18px -8px rgba(99,102,241,0.9);
+
+  /* Layout */
+  --container-width: 1296px;
+  --radius-s: 6px;
+  --radius-m: 8px;
+  --radius-l: 24px;
+
+  /* Övergångar */
+  --transition: 0.2s ease;
+}
+
+/* ===== Reset & bas ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font);
+  color: var(--gray-900);
+  background: var(--white);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden; /* skyddsnät mot oväntad horisontell scroll */
+}
+
+img { max-width: 100%; display: block; }
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+button, input { font: inherit; }
+
+.container {
+  width: 100%;
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+section { padding: clamp(48px, 8vw, 100px) 0; }
+
+/* Flytande typografi — skalar mjukt mellan mobil och desktop
+   istället för att hoppa mellan fasta storlekar i varje brytpunkt. */
+h1, h2, h3 {
+  font-weight: 800;
+  line-height: 1.3;
+  color: var(--gray-900);
+}
+
+h1 { font-size: clamp(32px, 4.5vw, 56px); }
+h2 { font-size: clamp(26px, 3vw, 40px); margin-bottom: 16px; }
+h3 { font-size: clamp(20px, 1.8vw, 24px); line-height: 1.4; }
+
+.muted { color: var(--gray-700); }
+.center { text-align: center; }
+
+.body-s { font-size: 14px; }
+.body-m { font-size: 16px; }
+.body-l { font-size: 18px; color: var(--gray-700); }
+
+/* Tydlig, synlig fokusmarkering för tangentbordsnavigering (tillgänglighet) */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+summary:focus-visible {
+  outline: 3px solid var(--brand-primary);
+  outline-offset: 3px;
+}
+
+/* =====================================================================
+   OM NÄSTLINGEN I DEN HÄR FILEN
+   Native CSS-nästling (&) STÖDJER INTE Sass-stilens BEM-sammanfogning
+   (&__element eller &--modifier blir INTE .block__element — webbläsaren
+   tolkar det som en HTML-tagg som heter "__element", vilket aldrig
+   matchar något). Våra BEM-klasser (__element, --modifier) står därför
+   kvar som egna, platta toppnivå-selektorer, precis som innan.
+
+   Nästling används bara där det faktiskt fungerar korrekt i CSS:
+   pseudo-klasser (&:hover), pseudo-element (&::placeholder),
+   attributselektorer (&[open]), och riktiga HTML-taggar/kombinatorer
+   som redan är avsedda som "vad som helst inuti det här elementet"
+   (img, h2, p, > *, osv). Varje BEM-klass är sin egen nästlings-"värd"
+   för den typen av barn — bara inte för andra BEM-klasser.
+   ===================================================================== */
+
+/* ===== Knappar ===== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font);
+  font-weight: 600;
+  font-size: 16px;
+  border: none;
+  border-radius: var(--radius-s);
+  padding: 13px 28px;
+  cursor: pointer;
+  transition: opacity var(--transition), transform var(--transition);
+
+  &:hover { opacity: 0.9; }
+  &:active { transform: translateY(1px); }
+}
+
+.btn--primary {
+  background: var(--brand-primary);
+  color: var(--white);
+  box-shadow: var(--shadow-brand);
+}
+
+.btn--sm { font-size: 14px; padding: 9px 20px; }
+
+.icon-18 { width: 18px; height: 18px; }
+.icon-20 { width: 20px; height: 20px; }
+
+/* ===== Navbar ===== */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255,255,255,0.9);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--gray-300);
+}
+
+.navbar__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 76px;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  padding-block: 12px;
+}
+
+.navbar__logo {
+  position: relative;
+  display: inline-block;
+  width: 122px;
+  height: 44px;
+}
+
+/* Två bildvarianter (ljus/mörk logga), tonade mjukt mellan varandra
+   med opacity. Se dark-theme.css för själva temaväxlingen. */
+.navbar__logo-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 44px;
+  width: 122px;
+  object-fit: contain;
+  transition: opacity var(--transition);
+}
+.navbar__logo-img--dark { opacity: 0; }
+
+.navbar__right {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.theme-switch {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-weight: 600;
+  color: var(--gray-700);
+  white-space: nowrap;
+}
+
+/* Tema-knappens grundutseende — en riktig <button>, styrd av JS
+   (toggle.js) som sätter data-theme på <body>. */
+.theme-switch__toggle {
+  width: 46px; height: 24px; flex-shrink: 0;
+  border: none; border-radius: 20px; position: relative; cursor: pointer;
+  background: var(--gray-300);
+  transition: background var(--transition);
+}
+.theme-switch__toggle::after {
+  content: '';
+  position: absolute; top: 2px; left: 2px;
+  width: 20px; height: 20px; border-radius: 50%;
+  background: var(--white);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  transition: transform var(--transition);
+}
+.theme-switch__toggle:focus-visible {
+  outline: 3px solid var(--brand-primary);
+  outline-offset: 3px;
+}
+
+/* Hamburgermeny — JS-driven (toggle.js), ingen checkbox-hack.
+   .navbar__right och .nav-toggle-btn får klassen .is-open från JS. */
+.nav-toggle-btn {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 30px;
+  height: 36px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+
+  span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: var(--gray-900);
+    border-radius: 2px;
+    transition: transform var(--transition), opacity var(--transition);
+  }
+}
+
+.nav-toggle-btn.is-open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-toggle-btn.is-open span:nth-child(2) { opacity: 0; }
+.nav-toggle-btn.is-open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ===== Header (Figma: "Hero") =====
+   Bildkomposit-boxen (.header__image) har exakt samma proportion
+   (746:936) som i Figma-filen. Telefonerna positioneras i procent
+   INOM den boxen, så de kan aldrig svämma över — oavsett bredd.
+   GRID-VARIANT: kolumnbredderna sätts direkt i grid-template-columns
+   istället för flex+max-width på varje barn. */
+.header {
+  padding-top: 64px;
+  padding-bottom: 32px;
+  background:
+    radial-gradient(ellipse 900px 500px at 75% 0%, rgba(99,102,241,0.10), transparent 60%),
+    radial-gradient(ellipse 700px 400px at 95% 20%, rgba(218,70,239,0.05), transparent 60%);
+}
+
+.header__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 526px) minmax(280px, 1fr);
+  gap: 48px;
+  align-items: center;
+}
+
+.header__content { display: flex; flex-direction: column; gap: 48px; }
+.header__text { display: flex; flex-direction: column; gap: 24px; }
+
+.header__image {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  margin-inline: auto;
+  aspect-ratio: 746 / 936; /* exakt Figma-proportion — förhindrar överlapp */
+}
+
+.header__phone {
+  position: absolute;
+  width: auto;
+  border-radius: var(--radius-l);
+}
+
+/* Bakre telefonen (balansvyn), ligger till vänster i kompositen */
+.header__phone--back {
+  top: 14.5%;
+  left: 15.4%;
+  width: 53.1%;
+  z-index: 1;
+}
+
+/* Främre telefonen (transaktionsvyn), ligger till höger, ovanpå */
+.header__phone--front {
+  top: 0;
+  left: 46.1%;
+  width: 53.9%;
+  z-index: 2;
+  filter: drop-shadow(0 30px 40px rgba(11,15,25,0.15));
+}
+
+.market-btns { display: flex; gap: 24px; flex-wrap: wrap; }
+
+.market-btn {
+  img { border-radius: 8px; }
+}
+
+/* ===== Logos (Figma: "Brands") =====
+   GRID-VARIANT: repeat(6, 1fr) ger sex lika breda kolumner direkt —
+   ingen calc() på barnen behövs, till skillnad från flexbox-varianten. */
+.logos__grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 20px;
+}
+
+.logo-card {
+  position: relative;
+  height: 100px;
+  border: 1px solid var(--gray-300);
+  border-radius: var(--radius-m);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: var(--white);
+  transition: box-shadow var(--transition), background var(--transition), border-color var(--transition);
+}
+
+.logo-card--shadow { box-shadow: var(--shadow-s); }
+
+/* Två bildvarianter (ljus/mörk logga), tonade mjukt mellan varandra
+   med opacity. Se dark-theme.css för själva temaväxlingen. */
+.logo-card__img {
+  position: absolute;
+  max-width: calc(100% - 40px);
+  max-height: calc(100% - 40px);
+  transition: opacity var(--transition);
+}
+.logo-card__img--dark { opacity: 0; }
+
+/* ===== Features (Figma: ikonrutnät + telefon) =====
+   GRID-VARIANT: kolumnbredder i grid-template-columns, ikonrutnätet
+   som repeat(2, 1fr) istället för flex-basis-beräkningar. */
+.features__inner {
+  display: grid;
+  grid-template-columns: minmax(260px, 348px) 1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+.features__image {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 348px;
+
+  img { border-radius: var(--radius-l); }
+}
+
+.features__content {
+  h2 { margin-bottom: 8px; }
+  > p { margin-bottom: 40px; max-width: 480px; }
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px 40px;
+}
+
+.feature-grid--2col { margin-block: 32px; }
+
+.feature-item {
+  h3 { font-size: 20px; margin: 16px 0 8px; }
+}
+
+.feature-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: var(--radius-m);
+  background: var(--brand-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img { width: 28px; height: 28px; }
+}
+
+.feature-icon--sm {
+  width: 28px;
+  height: 28px;
+  background: none;
+  border-radius: 0;
+
+  img { width: 28px; height: 28px; }
+}
+
+/* ===== Slider Section (Figma: "How Does It Work") ===== */
+.slider-section {
+  background: var(--gray-100);
+  border-radius: var(--radius-l);
+  margin-inline: 24px;
+
+  h2 { margin-bottom: 64px; text-align: center; }
+}
+
+.carousel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+  max-width: 100%;
+  overflow-x: auto;
+  padding: 8px 4px 16px; /* plats för skugga + ev. scrollbar */
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+}
+
+.carousel__phone {
+  border-radius: var(--radius-l);
+  box-shadow: var(--shadow-m);
+  flex-shrink: 0;
+  scroll-snap-align: center;
+  width: min(328px, 60vw);
+}
+
+.carousel__phone--main { z-index: 2; }
+.carousel__phone--side { opacity: 0.6; }
+
+.slider-section__caption {
+  text-align: center;
+  max-width: 636px;
+  margin: 48px auto 0;
+
+  h3 { margin-bottom: 12px; }
+}
+
+/* ===== App Features (Figma: bild+text-sektionerna) =====
+   GRID-VARIANT: 1fr 1fr ger två lika breda kolumner direkt. */
+.app-features__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+.app-features--reverse .app-features__content { order: 1; }
+.app-features--reverse .app-features__image { order: 2; }
+
+.app-features__content {
+  h2 { margin-bottom: 32px; }
+}
+
+.check-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 32px;
+
+  li { display: flex; align-items: center; gap: 8px; color: var(--gray-700); font-size: 16px; }
+}
+
+/* ===== Testimonials Section ===== */
+.testimonials-section { background: var(--gray-100); }
+
+/* GRID-VARIANT: sidokolumn + kortrad som ett 280px/1fr-rutnät,
+   och de två korten som repeat(2, 1fr) inuti det. */
+.testimonials-section__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 280px) 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+.testimonials-section__side {
+  h2 { margin-bottom: 0; }
+}
+
+.testimonial-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.testimonial-card {
+  position: relative;
+  background: var(--white);
+  border-radius: var(--radius-m);
+  padding: 48px 24px 24px;
+  box-shadow: var(--shadow-s);
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  transition: box-shadow var(--transition), transform var(--transition);
+
+  &:hover { box-shadow: var(--shadow-m); transform: translateY(-2px); }
+}
+
+.testimonial-card__quote {
+  position: absolute;
+  top: -20px;
+  left: 24px;
+  width: 44px;
+  height: 44px;
+  background: var(--brand-primary);
+  border-radius: var(--radius-s);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-brand);
+
+  img { width: 20px; height: 20px; filter: brightness(0) invert(1); }
+}
+
+.stars { color: var(--warning); letter-spacing: 2px; }
+
+.testimonial-card__author {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  img { width: 48px; height: 48px; border-radius: 4px; object-fit: cover; }
+  strong { display: block; font-size: 16px; }
+  span { display: block; font-size: 14px; color: var(--gray-600); }
+}
+
+/* ===== FAQ =====
+   GRID-VARIANT: sidokolumn + accordion som ett minmax()/1fr-rutnät,
+   kontaktrutorna som repeat(2, 1fr). */
+.faq__inner {
+  display: grid;
+  grid-template-columns: minmax(260px, 416px) 1fr;
+  gap: 100px;
+  align-items: start;
+}
+
+.faq__side {
+  h2 { margin-bottom: 24px; }
+  > p { margin-bottom: 48px; }
+}
+
+.faq__contact-boxes { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+
+.contact-box {
+  border: 1px solid var(--gray-300);
+  border-radius: var(--radius-m);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: box-shadow var(--transition);
+
+  &:hover { box-shadow: var(--shadow-s); }
+  p { margin-top: -4px; }
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.link--brand { color: var(--brand-primary); }
+.link--success { color: var(--success); }
+
+/* Visas bara på tablet/mobil — se @media-block längre ner */
+.faq__mobile-contact { display: none; }
+
+.accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.accordion__item {
+  background: var(--white);
+  border-radius: var(--radius-m);
+  box-shadow: var(--shadow-s);
+  padding: 16px 24px;
+
+  &[open] {
+    padding-bottom: 24px;
+
+    .chevron { transform: rotate(180deg); }
+  }
+
+  summary {
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    font-weight: 600;
+    font-size: 16px;
+  }
+
+  p { margin-top: 16px; color: var(--gray-700); }
+}
+
+.accordion__item summary::-webkit-details-marker { display: none; }
+
+.chevron {
+  width: 20px;
+  height: 20px;
+  padding: 8px;
+  background: var(--gray-100);
+  border-radius: 40px;
+  box-sizing: content-box;
+  flex-shrink: 0;
+  transition: transform var(--transition);
+}
+
+/* ===== Subscribe ===== */
+.subscribe-card {
+  background: var(--gray-100);
+  border-radius: var(--radius-m);
+  padding: 40px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  h3 { font-size: 24px; max-width: 416px; flex: 1; }
+}
+
+.subscribe-card__icon { width: 78px; height: 78px; flex-shrink: 0; }
+
+.subscribe-card__form {
+  display: flex;
+  flex-shrink: 0;
+
+  .btn {
+    border-radius: 0 var(--radius-m) var(--radius-m) 0;
+    box-shadow: none;
+  }
+}
+
+.subscribe-card__input {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  img { position: absolute; left: 15px; width: 20px; height: 20px; pointer-events: none; }
+
+  input {
+    font-family: var(--font);
+    border: 1px solid var(--gray-400);
+    border-radius: var(--radius-m) 0 0 var(--radius-m);
+    border-right: none;
+    padding: 14px 15px 14px 43px;
+    font-size: 16px;
+    width: 260px;
+    outline: none;
+    transition: border-color var(--transition);
+  }
+}
+
+.subscribe-card__input input:focus { border-color: var(--brand-primary); }
+.subscribe-card__input input::placeholder { color: var(--gray-500); }
+
+/* ===== Footer ===== */
+.footer { padding: 32px 0; color: var(--gray-600); }
+
+/* ===== Responsiv layout =====
+   Tre brytpunkter: 1024px (tablet), 768px (stor mobil/tablet
+   stående), 480px (mobil). Typografi/padding sköts av clamp()
+   ovan och behöver INTE upprepas här. */
+
+@media (max-width: 1024px) {
+  .header__inner,
+  .features__inner,
+  .app-features__inner,
+  .faq__inner,
+  .testimonials-section__inner {
+    grid-template-columns: 1fr;
+  }
+  /* Fasta bredd-tak behövs bara i två-kolumns-läget — släpp dem när allt staplas */
+  .header__image {
+    max-width: 380px;
+    margin-inline: auto;
+  }
+  .testimonials-section__side h2 { margin-bottom: 32px; }
+  .app-features--reverse .app-features__content,
+  .app-features--reverse .app-features__image { order: initial; }
+  .logos__grid { grid-template-columns: repeat(3, 1fr); } /* 3 per rad */
+  .testimonial-grid { grid-template-columns: 1fr; }
+  .slider-section { margin-inline: 16px; }
+}
+
+@media (max-width: 768px) {
+  .navbar__inner { position: relative; }
+
+  /* Hamburgermeny ersätter Dark Mode-switch + Sign in/up-knapp */
+  .nav-toggle-btn { display: flex; }
+  .navbar__right {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    background: var(--white);
+    border-bottom: 1px solid var(--gray-300);
+    box-shadow: var(--shadow-m);
+    padding: 16px 24px 24px;
+  }
+  .navbar__right.is-open { display: flex; }
+  .theme-switch__label { display: inline; } /* gott om plats i den öppna menyn */
+
+  /* Sektioner som Figma-filen inte ritat för tablet — utesluts, inte bara skalas ner */
+  .app-features,
+  .testimonials-section { display: none; }
+
+  /* App Features tappar telefonmockupen på tablet, enligt Figma */
+  .features__image { display: none; }
+
+  /* FAQ: en enkel "Contact us now"-knapp ersätter de två kontaktrutorna */
+  .faq__contact-boxes { display: none; }
+  .faq__mobile-contact { display: inline-flex; margin-top: 8px; }
+
+  .btn--sm { padding: 9px 14px; }
+  .faq__inner { gap: 48px; }
+}
+
+@media (max-width: 640px) {
+  .container { padding: 0 16px; }
+  .logos__grid { grid-template-columns: repeat(2, 1fr); } /* 2 per rad */
+  .feature-grid { grid-template-columns: 1fr; }
+  .subscribe-card { flex-direction: column; align-items: flex-start; }
+  .subscribe-card__form { width: 100%; flex-direction: column; }
+  .subscribe-card__input input { width: 100%; border-radius: var(--radius-m); border-right: 1px solid var(--gray-400); }
+  .subscribe-card__form .btn { border-radius: var(--radius-m); margin-top: 12px; }
+}
+
+@media (max-width: 480px) {
+  .navbar__logo { width: 96px; height: 34px; }
+  .navbar__logo-img { width: 96px; height: 34px; }
+  .btn__label { display: none; } /* Sign in/up-knappen krymper till bara ikonen */
+  .btn--sm { padding: 10px; }
+  .header { padding-top: 40px; }
+  .header__image { display: none; } /* Figma-filens Mobile-variant visar inga telefoner i Header */
+  .market-btns { gap: 12px; }
+  .market-btn img { height: 44px !important; }
+  .slider-section { margin-inline: 8px; }
+  .carousel { gap: 16px; }
+  .subscribe-card { padding: 24px; }
+  .subscribe-card h3 { font-size: 20px; }
+
+  /* Logos/Brands finns inte alls i Figma-filens Mobile-variant */
+  .logos { display: none; }
+}
+
+/* Respektera användarens systeminställning för minskad rörelse */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
