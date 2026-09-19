@@ -1,0 +1,152 @@
+/* =====================================================================
+   DARK THEME — fullständig överlagring
+   Länkas EFTER styles.css. Allt här är scopat under body[data-theme="dark"]
+   och lägger sig ovanpå huvudprojektets befintliga ljusa CSS utan att
+   ändra den. Baserat på FIGMA-DARK-KARTLAGGNING.md.
+
+   Grundprincip (gäller nästan hela filen): mörkt läge återanvänder
+   vitt/svart med varierande opacitet ovanpå en gemensam mörk bas
+   (#0B0F19) — det är INTE en helt egen färgpalett. Brand-lila,
+   success-grön och warning-gul är oförändrade i båda lägena.
+
+   STATUS: 8 av 10 sektioner bekräftade direkt mot Figma. De två
+   "App Features"-sektionerna (banking) extrapolerar samma mönster —
+   inte bekräftade rad för rad (Figma-anropstaket nåddes). Flaggat
+   nedan var det gäller.
+   ===================================================================== */
+
+:root {
+  --dark-bg: #0B0F19;
+  --dark-surface: rgba(255, 255, 255, 0.04);   /* kort/paneler istället för Gray/100 */
+  --dark-border: rgba(255, 255, 255, 0.15);     /* kantlinjer istället för Gray/300 */
+  --dark-border-input: rgba(255, 255, 255, 0.18);
+  --dark-input-bg: rgba(255, 255, 255, 0.02);
+}
+
+body[data-theme="dark"] {
+  background: var(--dark-bg);
+  color: #FFFFFF;
+}
+
+/* ===== Navbar ===== */
+body[data-theme="dark"] .navbar {
+  background: rgba(11, 15, 25, 0.85);
+  border-bottom-color: var(--dark-border);
+}
+
+/* Loggan: två separata bildfiler (ljus/mörk), hämtade från kollegans
+   export 2026-09-14 — logo-dark.svg bekräftat vit text i SVG-koden. */
+body[data-theme="dark"] .navbar__logo-img--light { opacity: 0; }
+body[data-theme="dark"] .navbar__logo-img--dark { opacity: 1; }
+
+/* Tema-knappens grundutseende ligger redan i styles.css (grid-varianten
+   la till den direkt där). Här behövs bara det mörka overridet: */
+body[data-theme="dark"] .theme-switch__toggle { background: var(--brand-primary); }
+body[data-theme="dark"] .theme-switch__toggle::after { transform: translateX(22px); }
+
+/* ===== Header (Hero) ===== */
+body[data-theme="dark"] .header {
+  background:
+    radial-gradient(ellipse 900px 500px at 75% 0%, rgba(99,102,241,0.15), transparent 60%),
+    radial-gradient(ellipse 700px 400px at 95% 20%, rgba(218,70,239,0.08), transparent 60%),
+    var(--dark-bg);
+}
+body[data-theme="dark"] .header__text h1 { color: #FFFFFF; }
+body[data-theme="dark"] .header__text .body-l { color: #FFFFFF; opacity: 0.7; }
+body[data-theme="dark"] .header__phone--front { filter: drop-shadow(0 30px 50px rgba(0,0,0,0.5)); }
+
+/* Badges: samma bildfil i båda lägena, färgerna vänds i CSS istället
+   för en andra bildfil (samma lösning som i dark-mode-test/). */
+body[data-theme="dark"] .market-btn__img { filter: invert(1) hue-rotate(180deg); }
+
+/* Telefonbilderna: identiska i båda lägena (bekräftat), ingen ändring. */
+
+/* ===== Logos (Brands) ===== */
+body[data-theme="dark"] .logo-card {
+  background: transparent;
+  border-color: var(--dark-border);
+}
+/* De 6 partnerloggorna: riktiga mörka SVG-exporter (kollegans export
+   2026-09-14) — ersätter den tidigare filter-gissningen. */
+body[data-theme="dark"] .logo-card__img--light { opacity: 0; }
+body[data-theme="dark"] .logo-card__img--dark { opacity: 1; }
+
+/* ===== Features (ikonrutnät + telefon) ===== */
+body[data-theme="dark"] .features__content h2 { color: #FFFFFF; }
+body[data-theme="dark"] .features__content > p { color: #FFFFFF; opacity: 0.5; }
+body[data-theme="dark"] .feature-item h3 { color: #FFFFFF; }
+body[data-theme="dark"] .feature-item p { color: #FFFFFF; opacity: 0.7; }
+/* Ikonrutans bakgrund (rgba(99,102,241,0.08)) är oförändrad — ingen regel behövs. */
+/* Telefonbilden (app-features-phone.png): LÖST 2026-09-14. Kollegans
+   export har riktig alfa-transparens — samma fil fungerar i båda
+   lägena, inget CSS eller andra bildvarianter behövs. */
+
+/* ===== Slider Section (How Does It Work) ===== */
+body[data-theme="dark"] .slider-section {
+  background: rgba(255, 255, 255, 0.04);
+}
+body[data-theme="dark"] .slider-section h2 { color: #FFFFFF; }
+body[data-theme="dark"] .slider-section__caption h3 { color: #FFFFFF; }
+body[data-theme="dark"] .slider-section__caption p { color: #FFFFFF; opacity: 0.7; }
+/* Karusellens telefonbilder: sannolikt identiska (samma mörka UI-innehåll
+   redan), men inte pixel-jämförda — se kartläggningen. */
+
+/* ===== App Features (banking-sektionerna) =====
+   EXTRAPOLERAT, inte bekräftat rad för rad mot Figma (anropstak nåddes).
+   Bygger på samma mönster som alla 8 andra bekräftade sektioner. */
+body[data-theme="dark"] .app-features__content h2 { color: #FFFFFF; }
+body[data-theme="dark"] .check-list li { color: #FFFFFF; opacity: 0.7; }
+body[data-theme="dark"] .app-features .feature-item p { color: #FFFFFF; opacity: 0.7; }
+/* Bilderna (banking-image-1.png/-2.png): LÖST 2026-09-14. Kollegans
+   export har riktig alfa-transparens (bekräftat pixel för pixel i
+   alla fyra hörn) — samma fil fungerar i båda lägena, inget CSS
+   eller andra bildvarianter behövs. Se FIGMA-DARK-KARTLAGGNING.md. */
+
+/* ===== Testimonials Section ===== */
+body[data-theme="dark"] .testimonials-section { background: rgba(255, 255, 255, 0.04); }
+body[data-theme="dark"] .testimonials-section__side h2 { color: #FFFFFF; }
+body[data-theme="dark"] .testimonial-card {
+  background: rgba(255, 255, 255, 0.04);
+  box-shadow: none;
+}
+body[data-theme="dark"] .testimonial-card p { color: #FFFFFF; opacity: 0.7; }
+body[data-theme="dark"] .testimonial-card__author strong { color: #FFFFFF; }
+body[data-theme="dark"] .testimonial-card__author span { color: #FFFFFF; opacity: 0.5; }
+/* Citat-ikonens lila ruta och stjärnornas gula färg: oförändrade. */
+/* Avatarbilderna: sannolikt samma foton, inte bekräftat. */
+
+/* ===== FAQ ===== */
+body[data-theme="dark"] .faq__side h2 { color: #FFFFFF; }
+body[data-theme="dark"] .faq__side > p { color: #FFFFFF; opacity: 0.7; }
+body[data-theme="dark"] .accordion__item {
+  background: rgba(255, 255, 255, 0.04);
+  box-shadow: none;
+}
+body[data-theme="dark"] .accordion__item[open] {
+  border: 1px solid var(--dark-border);
+}
+body[data-theme="dark"] .accordion__item summary { color: #FFFFFF; }
+body[data-theme="dark"] .accordion__item p { color: #FFFFFF; opacity: 0.7; }
+body[data-theme="dark"] .chevron { background: rgba(255, 255, 255, 0.04); filter: invert(1); }
+body[data-theme="dark"] .contact-box { border-color: var(--dark-border); }
+body[data-theme="dark"] .contact-box p { color: #FFFFFF; opacity: 0.7; }
+/* Länkfärgerna (lila/grön): oförändrade.
+   OBS: Figma visar ett eget, distinkt ikon-utseende för öppen fråga
+   (fylld lila cirkel + vit pil) — vi har MEDVETET förenklat bort det
+   och återanvänder samma roterande pil-ikon i båda lägena. Se
+   kartläggningen om ni vill återställa pixel-perfekt trohet senare. */
+
+/* ===== Subscribe ===== */
+body[data-theme="dark"] .subscribe-card { background: rgba(255, 255, 255, 0.04); }
+body[data-theme="dark"] .subscribe-card h3 { color: #FFFFFF; }
+body[data-theme="dark"] .subscribe-card__input input {
+  background: var(--dark-input-bg);
+  border-color: var(--dark-border-input);
+  color: #FFFFFF;
+}
+body[data-theme="dark"] .subscribe-card__input input::placeholder { color: #FFFFFF; opacity: 0.4; }
+body[data-theme="dark"] .subscribe-card__input img { filter: invert(1); }
+/* Knappen och klock-ikonen: oförändrade. */
+
+/* ===== Footer ===== */
+body[data-theme="dark"] .footer p { color: #FFFFFF; opacity: 0.5; }
