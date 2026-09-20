@@ -57,7 +57,9 @@ body[data-theme="dark"] .header__phone--front { filter: drop-shadow(0 30px 50px 
 
 /* Badges: samma bildfil i båda lägena, färgerna vänds i CSS istället
    för en andra bildfil (samma lösning som i dark-mode-test/). */
-body[data-theme="dark"] .market-btn__img { filter: invert(1) hue-rotate(180deg); }
+/* Ingen mörk ruta bakom badgesen i mörkt läge — texten/ikonen (redan vit)
+   står direkt mot sidans mörka bakgrund, precis som Figma visar. */
+body[data-theme="dark"] .market-btn { background: transparent; padding: 0; }
 
 /* Telefonbilderna: identiska i båda lägena (bekräftat), ingen ändring. */
 

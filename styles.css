@@ -298,7 +298,17 @@ summary:focus-visible {
 .market-btns { display: flex; gap: 24px; flex-wrap: wrap; }
 
 .market-btn {
-  img { border-radius: 8px; }
+  display: inline-flex;
+  align-items: center;
+  background: var(--gray-900); /* mörk ruta bakom — återskapar originaldesignen i ljust läge */
+  border-radius: 8px;
+  padding: 6px 12px;
+  transition: background var(--transition);
+}
+
+.market-btn__img {
+  height: 22px;
+  width: auto;
 }
 
 /* ===== Logos (Figma: "Brands") =====
@@ -413,15 +423,21 @@ summary:focus-visible {
 }
 
 .carousel__phone {
-  border-radius: var(--radius-l);
   box-shadow: var(--shadow-m);
   flex-shrink: 0;
   scroll-snap-align: center;
-  width: min(328px, 60vw);
 }
 
-.carousel__phone--main { z-index: 2; }
-.carousel__phone--side { opacity: 0.6; }
+.carousel__phone--main {
+  z-index: 2;
+  height: min(560px, 60vh); /* huvudtelefonen — störst, styrd av höjd så proportionerna aldrig blir snedvridna */
+  width: auto;
+}
+
+.carousel__phone--side {
+  height: min(420px, 45vh); /* sido-telefonerna — samma höjdstyrning, oavsett varje bilds egna proportion */
+  width: auto;
+}
 
 .slider-section__caption {
   text-align: center;
@@ -743,7 +759,7 @@ summary:focus-visible {
   .header { padding-top: 40px; }
   .header__image { display: none; } /* Figma-filens Mobile-variant visar inga telefoner i Header */
   .market-btns { gap: 12px; }
-  .market-btn img { height: 44px !important; }
+  .market-btn img { height: 44px; }
   .slider-section { margin-inline: 8px; }
   .carousel { gap: 16px; }
   .subscribe-card { padding: 24px; }
