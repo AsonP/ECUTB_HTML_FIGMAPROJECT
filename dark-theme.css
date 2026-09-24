@@ -44,6 +44,10 @@ body[data-theme="dark"] .navbar__logo-img--dark { opacity: 1; }
 body[data-theme="dark"] .theme-switch__toggle { background: var(--brand-primary); }
 body[data-theme="dark"] .theme-switch__toggle::after { transform: translateX(22px); }
 
+/* Hamburgerikonens tre streck var mörka (var(--gray-900)) i båda lägena —
+   osynliga mot den mörka navbaren. Gör dem vita i mörkt läge. */
+body[data-theme="dark"] .nav-toggle-btn span { background: #FFFFFF; }
+
 /* ===== Header (Hero) ===== */
 body[data-theme="dark"] .header {
   background:
@@ -58,7 +62,9 @@ body[data-theme="dark"] .header__phone--front { filter: drop-shadow(0 30px 50px 
 /* Badges: samma bildfil i båda lägena, färgerna vänds i CSS istället
    för en andra bildfil (samma lösning som i dark-mode-test/). */
 /* Ingen mörk ruta bakom badgesen i mörkt läge — texten/ikonen (redan vit)
-   står direkt mot sidans mörka bakgrund, precis som Figma visar. */
+   står direkt mot sidans mörka bakgrund, precis som Figma visar.
+   OBS: padding rörs INTE här (bara background) — annars flyttar sig
+   ikonen synligt när man växlar läge. */
 body[data-theme="dark"] .market-btn { background: transparent; }
 
 /* Telefonbilderna: identiska i båda lägena (bekräftat), ingen ändring. */
